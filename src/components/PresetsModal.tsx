@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Plus, Trash2, Check, Cloud } from 'lucide-react';
+import { X, Plus, Trash2, Check, Database } from 'lucide-react';
 import { Preset, LauncherSettings } from '../types.ts';
 
 interface PresetsModalProps {
@@ -10,7 +10,7 @@ interface PresetsModalProps {
   onApplyPreset: (preset: Preset) => void;
   onSaveNewPreset: (name: string) => void;
   onDeletePreset: (id: string) => void;
-  onOpenDrive?: () => void;
+  onOpenSupabase?: () => void;
 }
 
 export function PresetsModal({
@@ -20,7 +20,7 @@ export function PresetsModal({
   onApplyPreset,
   onSaveNewPreset,
   onDeletePreset,
-  onOpenDrive,
+  onOpenSupabase,
 }: PresetsModalProps) {
   const [name, setName] = useState('');
   const [appliedId, setAppliedId] = useState<string | null>(null);
@@ -60,18 +60,18 @@ export function PresetsModal({
           </div>
 
           <div className="flex items-center gap-1.5">
-            {onOpenDrive && (
+            {onOpenSupabase && (
               <button
                 type="button"
                 onClick={() => {
                   onClose();
-                  onOpenDrive();
+                  onOpenSupabase();
                 }}
-                className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-blue-950/40 border border-blue-800/60 text-blue-300 hover:text-blue-200 text-xs font-medium cursor-pointer transition-colors"
-                title="Google Drive Sync"
+                className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-950/40 border border-emerald-800/60 text-emerald-300 hover:text-emerald-200 text-xs font-medium cursor-pointer transition-colors"
+                title="Supabase Cloud Sync"
               >
-                <Cloud className="w-3.5 h-3.5 text-blue-400" />
-                <span>Drive Sync</span>
+                <Database className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Supabase Sync</span>
               </button>
             )}
 

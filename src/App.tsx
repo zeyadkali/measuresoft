@@ -8,7 +8,7 @@ import {
   Compass,
   Clock,
   ChevronUp,
-  Cloud,
+  Database,
 } from 'lucide-react';
 import { LauncherMode, AppConfig, LauncherSettings, Preset, ConnectionStatus, ConnectionConfig } from './types.ts';
 import {
@@ -28,7 +28,7 @@ import { BigActionButtons } from './components/BigActionButtons.tsx';
 import { SettingsModal } from './components/SettingsModal.tsx';
 import { PresetsModal } from './components/PresetsModal.tsx';
 import { ConnectionModal } from './components/ConnectionModal.tsx';
-import { GoogleDriveModal } from './components/GoogleDriveModal.tsx';
+import { SupabaseModal } from './components/SupabaseModal.tsx';
 import { PWAInstallButton } from './components/PWAInstallButton.tsx';
 import { OfflineIndicator } from './components/OfflineIndicator.tsx';
 
@@ -46,9 +46,9 @@ export default function App() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isPresetsOpen, setIsPresetsOpen] = useState(false);
   const [isConnectionOpen, setIsConnectionOpen] = useState(false);
-  const [isDriveOpen, setIsDriveOpen] = useState(false);
+  const [isSupabaseOpen, setIsSupabaseOpen] = useState(false);
 
-  const handleRestoreFromDrive = (restoredPresets: Preset[], restoredConfig?: AppConfig) => {
+  const handleRestoreFromSupabase = (restoredPresets: Preset[], restoredConfig?: AppConfig) => {
     if (restoredPresets && restoredPresets.length > 0) {
       setPresets((prev) => {
         const existingIds = new Set(prev.map((p) => p.id));
@@ -343,12 +343,12 @@ export default function App() {
 
             <button
               type="button"
-              onClick={() => setIsDriveOpen(true)}
-              aria-label="Google Drive Sync"
-              title="Google Drive Sync"
-              className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-blue-400 hover:border-blue-500/40 cursor-pointer transition-colors"
+              onClick={() => setIsSupabaseOpen(true)}
+              aria-label="Supabase Cloud Sync"
+              title="Supabase Cloud Sync"
+              className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-emerald-400 hover:border-emerald-500/40 cursor-pointer transition-colors"
             >
-              <Cloud className="w-4 h-4" />
+              <Database className="w-4 h-4" />
             </button>
 
             <button
@@ -487,7 +487,7 @@ export default function App() {
           onApplyPreset={handleApplyPreset}
           onSaveNewPreset={handleSaveNewPreset}
           onDeletePreset={handleDeletePreset}
-          onOpenDrive={() => setIsDriveOpen(true)}
+          onOpenSupabase={() => setIsSupabaseOpen(true)}
         />
 
         <ConnectionModal
@@ -501,12 +501,12 @@ export default function App() {
           lastCommand={lastPacket}
         />
 
-        <GoogleDriveModal
-          isOpen={isDriveOpen}
-          onClose={() => setIsDriveOpen(false)}
+        <SupabaseModal
+          isOpen={isSupabaseOpen}
+          onClose={() => setIsSupabaseOpen(false)}
           currentPresets={presets}
           currentConfig={config}
-          onRestorePresets={handleRestoreFromDrive}
+          onRestorePresets={handleRestoreFromSupabase}
         />
       </main>
     </div>
