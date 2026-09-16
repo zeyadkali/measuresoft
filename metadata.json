@@ -1,0 +1,6 @@
+{
+  "name": "TT Launcher Controller",
+  "description": "Mobile controller for ESP32/Arduino table tennis ball launcher with customizable mode limits and presets.",
+  "requestFramePermissions": ["bluetooth"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
